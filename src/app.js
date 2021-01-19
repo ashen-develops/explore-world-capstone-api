@@ -10,13 +10,13 @@ const {
 const errorHandler = require('./middleware/error-handler');
 const authRouter = require('./auth/auth-router'); 
 const usersRouter = require('./users/users-router');
-const musicRouter = require('./music/music-router');
+const statesRouter = require('./states/states-router');
 
 const app = express();
 
-const corsOptions = {
-  origin: 'https://wonderful-music-contraption.vercel.app'
-};
+// const corsOptions = {
+//   origin: 'https://wonderful-music-contraption.vercel.app'
+// };
 
 const morganOption = (NODE_ENV === 'production') ?
   'tiny' :
@@ -39,7 +39,7 @@ app.use('/api/auth', authRouter);
 //Load user registration router
 app.use('/api/users', usersRouter); 
 
-app.use('/api/music', musicRouter);
+app.use('/api/states', statesRouter);
 
 // basic api endpoint
 app.get('/', (req, res) => {
