@@ -11,6 +11,7 @@ const errorHandler = require('./middleware/error-handler');
 const authRouter = require('./auth/auth-router'); 
 const usersRouter = require('./users/users-router');
 const statesRouter = require('./states/states-router');
+const suggestionsRouter = require('./suggestions/suggestions-router');
 
 const app = express();
 
@@ -40,6 +41,8 @@ app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter); 
 
 app.use('/api/states', statesRouter);
+
+app.use('/api/suggestions', suggestionsRouter);
 
 // basic api endpoint
 app.get('/', (req, res) => {

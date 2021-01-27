@@ -6,9 +6,9 @@ const suggestionsRouter = express.Router();
 const jsonParser = express.json();
 
 //filter out the response to avoid showing broken data
-const serializeSuggestion = music => ({
+const serializeSuggestion = suggestions => ({
   id: suggestions.id,
-  forPlace: suggestions.forPlace,
+  for_place: suggestions.for_place,
   suggestion: suggestions.suggestion,
 });
 
@@ -26,11 +26,11 @@ suggestionsRouter
   .post(jsonParser, (req, res, next) => {
     //take the input from the user
     const {
-      forPlace,
+      for_place,
       suggestion
     } = req.body;
     const newSugg = {
-      forPlace,
+      for_place,
       suggestion
     };
 
@@ -59,48 +59,9 @@ suggestionsRouter
         //redirect the request to the original url adding the music id for editing
           .location(path.posix.join(req.originalUrl, `/${sugg.id}`))
         //return the serialized results
-          .json(serializeMusic(sugg));
+          .json(serializeSuggestion(sugg));
       })
       .catch(next);
   });
-
-
-suggestionsRouter
-  .route('/:music_id')
-  .all((req, res, next) => {
-    if (isNaN(parseInt(req.params.music_id))) {
-      //if there is an error show it
-      return res.status(404).json({
-        error: {
-          message: 'Invalid id'
-        }
-      });
-    }
-
-    //connect to the service to get the data
-    SuggestionService.getMusicById(
-      req.app.get('db'),
-      req.params.music_id
-    )
-      .then(music => {
-        if (!music) {
-          //if there is an error show it
-          return res.status(404).json({
-            error: {
-              message: 'Music doesn\'t exist'
-            }
-          });
-        }
-        res.music = music;
-        next();
-      })
-      .catch(next);
-  })
-  .get((req, res) => {
-
-    //get each one of the objects from the results and serialize them
-    res.json(serializeMusic(res.music));
-  })
-
 
 module.exports = suggestionsRouter;

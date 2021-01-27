@@ -5,13 +5,6 @@ const MusicService = {
         .select('*')
         .from('suggestions');
     },
-    getSuggestionsById(db, suggestion_id) {
-      return db
-        .select('*')
-        .from('suggestions')
-        .where('suggestions.id', suggestion_id)
-        .first();
-    },
     //relevant
     insertSuggestion(db, newSuggestion) {
       return db
