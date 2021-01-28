@@ -15,9 +15,6 @@ const suggestionsRouter = require('./suggestions/suggestions-router');
 
 const app = express();
 
-// const corsOptions = {
-//   origin: 'https://wonderful-music-contraption.vercel.app'
-// };
 
 const morganOption = (NODE_ENV === 'production') ?
   'tiny' :
@@ -27,24 +24,19 @@ const morganOption = (NODE_ENV === 'production') ?
 app.use(morgan(morganOption, {
   skip: () => NODE_ENV === 'test',
 }));
-// app.use(cors(corsOptions));
+
 app.use(cors());
 
 app.use(helmet());
 
-app.use(express.static('public'));
-
-//Load user login router
 app.use('/api/auth', authRouter); 
 
-//Load user registration router
 app.use('/api/users', usersRouter); 
 
 app.use('/api/states', statesRouter);
 
 app.use('/api/suggestions', suggestionsRouter);
 
-// basic api endpoint
 app.get('/', (req, res) => {
   res.send('Hello, world!');
 });

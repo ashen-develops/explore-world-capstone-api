@@ -1,6 +1,6 @@
-# Wonderful Music Contraption (Server)
+# Stuff To Do (Server)
 
-This is the backend code for The Wonderful Music Contraption, a music making app that allows users to create and save their own song creations (based on pre recorded loops)
+This is the backend code for the Stuff To Do app. This app will allow a user to create an account/ login, and then view a currated list of things to do in cities accross the US.
 
 - [Link to Live App](https://wonderful-music-contraption.vercel.app/)
 - [Link to Client Repo](https://github.com/ashen-develops/Wonderful-Music-Contraption)
@@ -9,9 +9,51 @@ This is the backend code for The Wonderful Music Contraption, a music making app
 
 ### Users Endpoints
 
-### ▸ `GET /api/music`
+### ▸ `GET /api/states`
+### ▸ `GET /api/states`
+### ▸ `GET /api/states`
+### ▸ `GET /api/states`
+### ▸ `GET /api/states`
 
-Returns an array of image posts that were submitted within a specified distance of the queried latitude and longitude. If there are no submissions within the query parameters, then the server makes a call to the Google Places API and returns an array of up to 20 images of businesses in the area.
+## App Structure
+
+* __migration__ folder contains all the sql files necesay for the DB setup
+* __public__ folder contains the View related files
+* __seed__ folder contains the seed files for the SQL tables
+* __src__ folder contains the Controller related files
+    * __server.js__ is the entry point of the Controller logic (where all the general app settings live)
+    * __app.js__ is the starting pint for the routes
+    * __config.js__ where the db config (url etc.) lives
+    * __logger.js__ logs errors
+    * __validate-bearer-token.js__ is used for api auth
+
+    * __auth__ folder contains the router with all the auth API endpoints
+        * __auth-router.js__ Auth Router
+            * POST Endpoint: Add a POST endpoint to this server (takes care of users logging in)
+        * __auth-service.js__ Service file for the Controller connection with the Model
+        
+    * __users__ folder contains the router with all the user API endpoints
+        * __users-router.js__ Users Router
+            * POST Endpoint: Add a POST endpoint to this server (takes care of users registering)
+        * __users-service.js__ Service file for the Controller connection with the Model
+
+    * __suggestions__ folder contains the router with all the music API endpoints
+        * __suggestions-router.js__ Music Router
+            * POST Endpoint: Add a POST endpoint to this server (takes care of users saving their tracks)
+            * GET Endpoint: Add a POST endpoint to this server (takes care of users seeing their tracks)
+            * DELETE Endpoint: Add a POST endpoint to this server (takes care of users deleting their tracks)
+        * __suggestions-service.js__ Service file for the Controller connection with the Model
+
+    * __states__ folder contains the router with all the music API endpoints
+        * __states-router.js__ Music Router
+            * POST Endpoint: Add a POST endpoint to this server (takes care of users saving their tracks)
+            * GET Endpoint: Add a POST endpoint to this server (takes care of users seeing their tracks)
+            * DELETE Endpoint: Add a POST endpoint to this server (takes care of users deleting their tracks)
+        * __states-service.js__ Service file for the Controller connection with the Model
+        
+    * __middleware__ folder contains functions that are used by the controller in multiple places
+        * __error-handler.js__ handles errors
+* __test__ folder contains the Test files
 
 **Sample query**
 

@@ -4,9 +4,7 @@ const StateService = require('./states-service');
 const store = require('../../seed/states');
 
 const stateRouter = express.Router();
-const jsonParser = express.json();
 
-//filter out the response to avoid showing broken data
 const serializeStates = state => ({
   id : state.id,
   state: state.state,
@@ -25,6 +23,6 @@ stateRouter
   .route('/')
   .get((req, res, next) => {
     res.status(200).json(store.states)
-  })
+  });
   
 module.exports = stateRouter;

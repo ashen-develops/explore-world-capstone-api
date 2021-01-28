@@ -32,7 +32,7 @@ describe('Auth Endpoints', function () {
         .insert(testUser);
     });
     it('get user', () => {
-      return AuthService.getUserWithUserName(db, 'email@email.com')
+      return AuthService.getUserWithUserName(db, 'user1')
         .then(actual => {
           expect(actual).to.eql({
             id: 1,
